@@ -106,7 +106,7 @@ To install:
    pip install -r requirements.txt
     ```
 
-### Usage
+## Usage
 
 **1. Trajectory Simulation and Plotting**
 
@@ -144,11 +144,11 @@ This script will:
 Example plots are provided in the plot folders. You can use the plotting utilities in utils/data.py and utils/utils.py
 to generate additional visualizations (e.g., turbulence heatmaps, control evolution, histograms of safety metrics).
 
-### Contributing
+## Contributing
 
 Contributions are welcome. If you have ideas for improvements or new features, please fork the repository and submit a
 pull request. For major changes, consider opening an issue first to discuss your proposed modifications.
 
-### License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
