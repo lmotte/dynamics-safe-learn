@@ -1,15 +1,19 @@
 # Safe Learning of Controlled Stochastic Dynamical Systems
 
+![License](https://img.shields.io/badge/License-MIT-black.svg)
+[![codecov](https://codecov.io/gh/lmotte/dynamics-safe-learn/graph/badge.svg?token=NOS3LWTIT1)](https://codecov.io/gh/lmotte/dynamics-safe-learn)
+
 This repository implements a kernel‐based method for safely learning the dynamics of controlled stochastic systems. By
-iteratively expanding an initial safe control set and leveraging kernel‐based confidence bounds, our approach ensures
-that each selected control produces trajectories confined to predefined safety boundaries. Consequently, even under
-uncertainty, the system operates safely while its underlying dynamics are accurately estimated. This method is
-particularly relevant for safety-critical applications, such as in autonomous robotics or biomedical contexts, where
-maintaining safety throughout the learning process is essential.
+iteratively expanding an initial safe control set and leveraging kernel-based confidence bounds, the approach ensures
+that each selected control generates trajectories within predefined safety boundaries. This allows the system to operate
+safely, even under uncertainty, while accurately estimating its dynamics. This method is particularly relevant
+to safety-critical scenarios, including autonomous robotics and biomedical contexts, where
+ensuring safety during learning is crucial.
 
 The repository includes implementations for:
+
 - Simulating trajectories.
-- Safely generating candidate control policies.
+- Safely generating candidate control functions.
 - Kernel-based estimation of dynamical systems.
 - Visualization of simulation results and safety performance metrics.
 
@@ -17,30 +21,31 @@ The repository includes implementations for:
 
 The repository is organized into several key components.
 
-### 1. Trajectory Simulation and Visualization
+### 1. Second-Order Systems Simulation and Visualization
 
-- **1D Systems:**  
-  Simulate second-order systems under sinusoidal control. Generate multiple control functions with random frequency
-  factors, simulate trajectories via Euler–Maruyama integration, and produce plots for control signals, positions, and
-  velocities.
-- **2D True Trajectories:**  
-  Aggregate simulated trajectories for different control policies into cumulative plots that capture the "true" behavior
-  of 2D systems.
+- **1D Systems:** Simulate one-dimensional second-order systems driven by sinusoidal control functions. Generate multiple
+  control functions with randomly selected frequency factors, simulate trajectories using Euler–Maruyama integration, and visualize
+  control functions, positions, and velocities.
 
-### 2. Safe Learning Experiments
+- **2D Systems:** Simulate two-dimensional second-order systems under various control functions. Aggregate the resulting
+  trajectories
+  into cumulative plots that capture the system's overall behavior.
 
-- **SafeSDE Model:**  
-  A kernel-based estimator (using a Gaussian/RBF kernel by default) that safely predicts safety and reset probabilities
-  for controlled stochastic systems. The model uses stored observations to compute uncertainty via lower confidence
-  bounds (LCB) and guides the safe learning process.
-- **Safe Learning Script:**  
-  Conducts safe learning experiments by:
-    - Sampling candidate controls and updating the SafeSDE model.
+### 2. Safe Learning Method
+
+- **SafeSDE Model:** A kernel-based estimator (using a Gaussian/RBF kernel by default) that safely estimates the
+  probability density of controlled stochastic systems.
+
+### 3. Safe Learning Experiments
+
+- **Safe Learning Script:** Run safe learning experiments using the SafeSDE model by:
+    - Sampling safe candidate controls.
     - Simulating system trajectories.
+    - Updating the SafeSDE model.
     - Computing performance metrics such as safety/reset probabilities and information gain.
     - Saving results (metrics, model snapshots, and simulation paths) for further analysis.
 
-### 3. Utility Functions and Plotting
+### 4. Utility Functions and Plotting
 
 - **Simulation Utilities (`utils/data.py`):**  
   Functions for SDE simulation (Euler–Maruyama method), control function generation (including sinusoidal and
@@ -51,24 +56,25 @@ The repository is organized into several key components.
 
 ## Repository Structure
 
+```text
 ├── README.md
 ├── requirements.txt
 ├── LICENSE
-├── tests
+├── tests/
 ├── paths_plot.png
-├── methods
+├── methods/
 │ └── safe_sde_estimation.py
-├── utils
+├── utils/
 │ ├── data.py
 │ └── utils.py
-└── examples
-├── example_1d
-├── example_1d.py
-└── plots
-└── example_2d
-├── 2d_second_order_plot_trajectories.py
-├── 2d_second_order_run.py
-└── plots
+└── examples/
+    ├── example_1d/
+    ├── example_1d.py
+    └── example_2d/
+        ├── 2d_second_order_plot_trajectories.py
+        ├── 2d_second_order_run.py
+        └── plots/
+```
 
 ## Installation
 
@@ -104,8 +110,8 @@ To install:
 
 **1. Trajectory Simulation and Plotting**
 
-- 1D Simulation and Plotting: Run the script to simulate 1D second-order systems under sinusoidal control and generate
-  plots:
+- 1D Simulation and Plotting: Run the script to simulate 1D second-order systems with sinusoidal control functions and
+  generate corresponding plots:
    ```bash
    python example_1d.py
     ```
@@ -115,13 +121,13 @@ To install:
     ```
 
 <p align="center">
-<img src="examples/example_2d/true_trajectory_results/true_trajectories_seed_17.png" alt="2D System Paths" width="500">
+<img src="examples/example_2d/true_trajectory_results/true_trajectories_seed_17.png" alt="Example of 2D system trajectories under multiple control policies." width="500">
 </p>
 
 **2. Safe Learning Experiments**
 
-Execute safe learning experiments using the SafeSDE model. Specify command-line parameters for kernel function, safety
-thresholds, and regularization:
+Run safe learning experiments using the SafeSDE model by specifying command-line parameters for the kernel function,
+safety thresholds, and regularization:
 
 ```bash
    python 2d_second_order_run.py --kernel_func 2.0 --betas 0.1 --lam 1e-6
@@ -140,7 +146,7 @@ to generate additional visualizations (e.g., turbulence heatmaps, control evolut
 
 ### Contributing
 
-Contributions are welcome! If you have ideas for improvements or new features, please fork the repository and submit a
+Contributions are welcome. If you have ideas for improvements or new features, please fork the repository and submit a
 pull request. For major changes, consider opening an issue first to discuss your proposed modifications.
 
 ### License
