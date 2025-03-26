@@ -21,6 +21,7 @@ jobs:
 
     - name: Run tests and generate coverage + test report
       run: |
+        echo "PYTHONPATH=$PWD" >> $GITHUB_ENV
         pytest --cov=methods --cov=utils --junitxml=junit.xml -o junit_family=legacy
         coverage xml
 
