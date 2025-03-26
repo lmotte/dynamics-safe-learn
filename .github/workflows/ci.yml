@@ -17,15 +17,15 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-        pip install coverage
+        pip install pytest coverage pytest-cov
 
-    - name: Run tests with coverage
+    - name: Run tests and generate coverage + test report
       run: |
-        coverage run -m pytest
+        pytest --cov=methods --cov=utils --junitxml=junit.xml -o junit_family=legacy
         coverage xml
 
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v5
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        slug: lmotte/dynamics-safe-learn
+        
