@@ -1,4 +1,4 @@
-# Safe Learning of Controlled Stochastic Dynamical Systems
+# Safe Learning of Controlled Stochastic Dynamics
 
 ![License](https://img.shields.io/badge/License-MIT-black.svg)
 [![codecov](https://codecov.io/gh/lmotte/dynamics-safe-learn/graph/badge.svg?token=NOS3LWTIT1)](https://codecov.io/gh/lmotte/dynamics-safe-learn)
